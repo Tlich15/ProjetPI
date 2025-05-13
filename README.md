@@ -10,3 +10,26 @@ L’authentification avec Flask-Login,
 
 Les migrations via Flask-Migrate.
 
+
+Flask-Web-App/
+│
+├── website/
+│   ├── __init__.py       # Initialisation de l'app
+│   ├── models.py         # Définition des modèles SQLAlchemy
+│   ├── views.py          # Routes publiques
+│   ├── auth.py           # Authentification
+│   └── api.py            # Routes API
+│
+├── admin/
+│   └── admin.py          # Interface Flask-Admin
+│
+├── migrations/           # Migrations de base de données
+│
+├── static/               # Fichiers statiques (CSS, JS, etc.)
+├── templates/            # Fichiers HTML
+│
+├── config.py             # Config globale (DB, clé secrète)
+├── run.py                # Point d'entrée de l'application
+├── requirements.txt      # Dépendances Python
+└── README.md             # Ce fichier
+
