@@ -33,3 +33,5 @@ Flask-Web-App/
 ├── requirements.txt      # Dépendances Python
 └── README.md             # Ce fichier
 
+📊 Fichier Power BI à télécharger :
+zip file [Test_Bashboard_PI_english.pbix](https://drive.google.com/file/d/1p_6lU_qgkm6cCehHx6wvDeZlML8B4jhA/view?usp=sharing)
