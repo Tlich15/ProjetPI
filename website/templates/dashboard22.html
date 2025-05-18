@@ -1,0 +1,282 @@
+{% extends "base.html" %}
+{% block title %}Product Dashboard - Advanced{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="dashboard-title">
+          <i class="fas fa-box text-primary mr-3"></i>Product Dashboard
+        </h1>
+        <p class="dashboard-subtitle">Advanced Product Analytics</p>
+      </div>
+      <div class="col-lg-6 text-right">
+        <div class="dashboard-actions d-flex flex-column align-items-end">
+          <a href="{{ url_for('views.dashboard2') }}" class="btn btn-prev mb-2">
+            <i class="fas fa-arrow-left mr-2"></i>
+            <span>Previous View</span>
+          </a>
+          <div>
+            <button class="btn btn-outline-primary mr-2" onclick="refreshReport('rapport')">
+              <i class="fas fa-sync-alt mr-1"></i> Refresh
+            </button>
+            <button class="btn btn-outline-primary" onclick="exportReport('rapport')">
+              <i class="fas fa-download mr-1"></i> Export
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="dashboard-card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <h3 class="mb-0">Product Analytics</h3>
+          <span class="text-muted small">Detailed product performance metrics</span>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="embed-responsive">
+          <iframe 
+            title="PI2" 
+            width="1200" 
+            height="720" 
+            style="border:5px solid #2196f3; border-radius: 30px;" 
+            src="https://app.powerbi.com/reportEmbed?reportId=f9dcba32-1690-4d59-baef-01460477c74a&autoAuth=true&ctid=604f1a96-cbe8-43f8-abbf-f8eaf5d85730&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLW5vcnRoLWV1cm9wZS1pLXByaW1hcnktcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D&filterPaneEnabled=false&navContentPaneEnabled=false"
+            frameborder="0" 
+            allowFullScreen="true"
+            id="rapport">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dashboard-container {
+    padding: 0;
+    margin-bottom: 3rem;
+  }
+  
+  .dashboard-header {
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .dashboard-subtitle {
+    color: #6c757d;
+    margin-bottom: 0;
+  }
+  
+  .btn-next {
+    background: linear-gradient(135deg, #2196f3, #1976d2);
+    color: white;
+    border-radius: 30px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  .btn-next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(33, 150, 243, 0.4);
+    color: white;
+  }
+  
+  .dashboard-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  
+  .card-header {
+    background-color: white;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .embed-responsive {
+    position: relative;
+    width: 100%;
+    height: 600px;
+  }
+  
+  .embed-responsive-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  
+  .dashboard-controls .btn {
+    border-radius: 20px;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    transition: all 0.2s;
+  }
+  
+  .dashboard-controls .btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .dashboard-tabs .nav-pills {
+    border-radius: 50px;
+    display: inline-flex;
+    background-color: #f1f4f8;
+    padding: 4px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dashboard-tabs .nav-pills .nav-link {
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.2s;
+  }
+  
+  .dashboard-tabs .nav-pills .nav-link.active {
+    background-color: #2196f3;
+    color: white;
+    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
+  }
+  
+  .dashboard-footer {
+    margin-top: 2rem;
+  }
+  
+  .stats-card {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  }
+  
+  .stats-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 1.25rem;
+    color: white;
+  }
+  
+  .stats-icon i {
+    font-size: 1.5rem;
+  }
+  
+  .bg-primary {
+    background-color: #2196f3;
+  }
+  
+  .bg-success {
+    background-color: #4caf50;
+  }
+  
+  .bg-warning {
+    background-color: #ff9800;
+  }
+  
+  .bg-info {
+    background-color: #00bcd4;
+  }
+  
+  .stats-info h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+  
+  .stats-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .text-success {
+    color: #4caf50 !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .text-danger {
+    color: #f44336 !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 991.98px) {
+    .dashboard-header .col-lg-6.text-right {
+      text-align: left !important;
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (max-width: 767.98px) {
+    .dashboard-footer .col-md-3 {
+      margin-bottom: 1rem;
+    }
+    
+    .dashboard-title {
+      font-size: 1.75rem;
+    }
+    
+    .stats-info h3 {
+      font-size: 1.4rem;
+    }
+  }
+  
+  .btn-prev {
+    background: #2196f3;
+    color: white;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-prev:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+    color: white;
+    text-decoration: none;
+  }
+</style>
+{% endblock %}
